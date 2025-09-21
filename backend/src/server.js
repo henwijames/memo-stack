@@ -24,7 +24,7 @@ app.use(rateLimiter);
 //   console.log("We just got a new req");
 //   next();
 // });
-app.use("api/auth", authRoutes);
+app.use("/api/auth", authRoutes);
 app.use("/api/notes", notesRoutes);
 
 connectDb().then(() => {
