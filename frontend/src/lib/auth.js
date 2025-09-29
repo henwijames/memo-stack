@@ -26,6 +26,15 @@ export const registerUser = async (userData) => {
     throw error;
   }
 };
+export const refreshToken = async () => {
+  try {
+    const res = await api.post("/auth/refresh");
+    return res.data;
+  } catch (error) {
+    console.error("Login error:", error);
+    throw error;
+  }
+};
 
 export const getProfile = async () => {
   const res = await api.get("/auth/profile");

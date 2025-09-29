@@ -1,4 +1,3 @@
-import Navbar from "@/components/Navbar";
 import RateLimitedUI from "@/components/RateLimitedUI";
 
 import { Skeleton } from "@/components/ui/skeleton";
