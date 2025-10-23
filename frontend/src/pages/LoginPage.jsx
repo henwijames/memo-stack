@@ -15,6 +15,7 @@ import { useState } from "react";
 import { loginUser } from "@/lib/auth";
 import { toast } from "sonner";
 import { useUser } from "@/context/UserContext";
+import { LoaderCircle } from "lucide-react";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -33,12 +34,13 @@ const LoginPage = () => {
   const { fetchUserProfile } = useUser();
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     try {
       const data = await loginUser(forms);
       localStorage.setItem("token", data.token);
       await fetchUserProfile();
       toast.success("Logged in successfully");
+
       navigate("/");
     } catch (error) {
       console.log("Error logging in:", error);
@@ -47,6 +49,7 @@ const LoginPage = () => {
         setForms((prev) => ({ ...prev, password: "" }));
         return;
       }
+
       toast.error(error.response.data.message || "Login failed");
     } finally {
       setLoading(false);
@@ -97,7 +100,12 @@ const LoginPage = () => {
                     </div>
                     <div className="flex flex-col gap-3">
                       <Button type="submit" className="w-full">
-                        {loading ? "Logging in..." : "Login"}
+                        {loading && (
+                          <span className="animate-spin">
+                            <LoaderCircle />
+                          </span>
+                        )}
+                        Login
                       </Button>
                     </div>
                   </div>
