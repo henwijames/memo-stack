@@ -129,6 +129,14 @@ const LoginPage = () => {
                 </form>
               </CardContent>
             </Card>
+            <Motion.p
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1 }}
+              className="text-xs text-right mt-2 text-primary font-mono tracking-tighter"
+            >
+              Made by Henwi
+            </Motion.p>
           </Motion.div>
         </div>
       </div>
