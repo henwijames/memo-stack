@@ -11,19 +11,50 @@ export const UserProvider = ({ children }) => {
 
   const fetchUserProfile = async () => {
     const token = localStorage.getItem("token");
-    if (!token) return;
+    if (!token) {
+      setLoading(false);
+      return;
+    }
 
     try {
       const res = await api.get("/auth/profile", {
         headers: { Authorization: `Bearer ${token}` },
+        withCredentials: true,
       });
       setUser(res.data);
     } catch (error) {
-      console.error("Error fetching user profile:", error);
-      setUser(null);
+      // If token expired, try to refresh
+      if (error.response && error.response.status === 401) {
+        console.warn("Access token expired, trying to refresh...");
+        const refreshed = await tryRefreshToken();
+        if (refreshed) {
+          return fetchUserProfile(); // retry after refresh
+        } else {
+          logout();
+        }
+      } else {
+        console.error("Error fetching user profile:", error);
+      }
     } finally {
       setLoading(false);
     }
+  };
+
+  const tryRefreshToken = async () => {
+    try {
+      const res = await api.post(
+        "/auth/refresh",
+        {},
+        { withCredentials: true }
+      );
+      if (res.status === 200 && res.data.token) {
+        localStorage.setItem("token", res.data.token);
+        return true;
+      }
+    } catch (err) {
+      console.error("Refresh token failed:", err);
+    }
+    return false;
   };
 
   useEffect(() => {
