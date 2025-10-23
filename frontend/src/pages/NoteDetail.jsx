@@ -21,7 +21,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import api from "@/lib/axios";
-import { ArrowLeftIcon, LoaderIcon, Trash, Trash2Icon } from "lucide-react";
+import {
+  ArrowLeftIcon,
+  LoaderCircle,
+  LoaderIcon,
+  Trash,
+  Trash2Icon,
+} from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
 import { toast } from "sonner";
@@ -81,7 +87,7 @@ const NoteDetail = () => {
   if (loading) {
     return (
       <div className="min-h-screen bg-base-200 flex items-center justify-center">
-        <LoaderIcon className="animate-spin size-10" />
+        <LoaderCircle className="animate-spin size-10" />
       </div>
     );
   }
