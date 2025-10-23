@@ -44,6 +44,7 @@ const LoginPage = () => {
       console.log("Error logging in:", error);
       if (error.response.status === 401) {
         setError("Invalid email or password");
+        setForms((prev) => ({ ...prev, password: "" }));
         return;
       }
       toast.error(error.response.data.message || "Login failed");
