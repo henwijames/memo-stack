@@ -15,7 +15,10 @@ const PORT = process.env.PORT || 5001;
 //middleware
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin:
+      process.env.NODE_ENV === "production"
+        ? process.env.APP_PRODUCTION_URI
+        : process.env.APP_URI,
     credentials: true,
   })
 );
