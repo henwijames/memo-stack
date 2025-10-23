@@ -151,7 +151,7 @@ const NoteDetail = () => {
                   type="text"
                   id="title"
                   placeholder="Type your title here."
-                  className={`w-full`}
+                  className={`w-full h-auto min-h-[200px]`}
                   value={note?.content || ""}
                   onChange={(e) =>
                     setNote({ ...note, content: e.target.value })
