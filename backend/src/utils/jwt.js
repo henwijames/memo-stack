@@ -5,8 +5,8 @@ dotenv.config();
 const SECRET = process.env.JWT_SECRET;
 const REFRESH = process.env.JWT_REFRESH;
 
-export const generateToken = (user) => {
-  return jwt.sign({ id: user._id }, SECRET, { expiresIn: "15m" });
+export const generateToken = (userId) => {
+  return jwt.sign({ id: userId }, process.env.JWT_SECRET, { expiresIn: "15m" });
 };
 
 export const verifyToken = (token) => {
