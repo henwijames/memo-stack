@@ -33,10 +33,18 @@ const CreatePage = () => {
     setLoading(true);
 
     try {
-      await api.post("/notes", {
-        title,
-        content,
-      });
+      await api.post(
+        "/notes",
+        {
+          title,
+          content,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`, // or wherever you store it
+          },
+        }
+      );
       toast.success("Note created successfully");
       navigate("/");
     } catch (error) {

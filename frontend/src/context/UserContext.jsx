@@ -42,7 +42,11 @@ export const UserProvider = ({ children }) => {
 
   const tryRefreshToken = async () => {
     try {
-      const res = await api.post("/auth/refresh"); // no headers or body needed
+      const res = await api.post(
+        "/auth/refresh",
+        {},
+        { withCredentials: true }
+      );
       if (res.status === 200 && res.data.token) {
         localStorage.setItem("token", res.data.token);
         return true;
