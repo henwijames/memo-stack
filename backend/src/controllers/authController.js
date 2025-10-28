@@ -49,7 +49,7 @@ export const loginUser = async (req, res) => {
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production", // only HTTPS in prod
-      sameSite: process.env.NODE_ENV === "production" ? "strict" : "lax",
+      sameSite: process.env.NODE_ENV === "production" ? "None" : "lax",
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
 
@@ -76,7 +76,7 @@ export const refreshToken = (req, res) => {
     return res.status(401).json({ message: "No refresh token" });
 
   jwt.verify(refreshToken, process.env.JWT_REFRESH, (err, decoded) => {
-    if (err) return res.status(403).json({ message: "Invalid refresh token" });
+    if (err) return res.status(401).json({ message: "Invalid refresh token" });
 
     const newAccessToken = generateToken(decoded.id);
     res.json({ token: newAccessToken });
