@@ -28,7 +28,8 @@ export const UserProvider = ({ children }) => {
         console.warn("Access token expired, trying to refresh...");
         const refreshed = await tryRefreshToken();
         if (refreshed) {
-          return fetchUserProfile(); // retry after refresh
+          await fetchUserProfile(); // retry after refresh
+          return;
         } else {
           logout();
         }
