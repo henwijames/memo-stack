@@ -25,7 +25,7 @@ import { useState } from "react";
 import api from "@/lib/axios";
 import { toast } from "sonner";
 
-const NoteCard = ({ note, i, setNotes }) => {
+const NoteCard = ({ note, setNotes }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleDelete = async (e, id) => {
@@ -46,7 +46,7 @@ const NoteCard = ({ note, i, setNotes }) => {
     <Motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3, delay: i * 0.1 }}
+      transition={{ duration: 0.3 }}
       whileTap={{ scale: 0.98 }}
     >
       <Card>

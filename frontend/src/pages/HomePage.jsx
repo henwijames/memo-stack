@@ -48,9 +48,9 @@ const HomePage = () => {
 
         {notes.length > 0 && !isRateLimited ? (
           <div className="columns-1 md:columns-2 lg:columns-3 gap-4 space-y-4">
-            {notes.map((note, i) => (
+            {notes.map((note) => (
               <div key={note._id} className="break-inside-avoid mb-4">
-                <NoteCard note={note} i={i} setNotes={setNotes} />
+                <NoteCard note={note} setNotes={setNotes} />
               </div>
             ))}
           </div>
