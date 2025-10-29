@@ -10,7 +10,6 @@ const PublicRoute = () => {
   }
   return (
     <div>
-      <Navbar />
       <main>
         <Outlet />
       </main>
