@@ -28,6 +28,7 @@ const HomePage = () => {
 
   useEffect(() => {
     const fetchNotes = async () => {
+      setLoading(true);
       try {
         const endpoint = debouncedSearch
           ? `/notes/search?q=${encodeURIComponent(debouncedSearch)}`
@@ -79,7 +80,7 @@ const HomePage = () => {
               </div>
             ))}
           </div>
-        ) : search ? (
+        ) : debouncedSearch ? (
           <p className="text-center mt-8 text-gray-500">
             No results found for "{search}"
           </p>
