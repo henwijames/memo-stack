@@ -4,20 +4,23 @@ import HomePage from "./pages/HomePage";
 import CreatePage from "./pages/CreatePage";
 import NoteDetail from "./pages/NoteDetail";
 import LoginPage from "./pages/LoginPage";
-import ProtectedLayout from "./layouts/ProtectedLayout";
+import ProtectedRoute from "./layouts/ProtectedLayout";
 import RegisterPage from "./pages/RegisterPage";
+import PublicRoute from "./layouts/PublicLayout";
 
 const App = () => {
   return (
     <Routes>
-      <Route element={<ProtectedLayout />}>
+      <Route element={<ProtectedRoute />}>
         <Route path="/" element={<HomePage />} />
         <Route path="/create" element={<CreatePage />} />
         <Route path="/note/:id" element={<NoteDetail />} />
       </Route>
 
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/register" element={<RegisterPage />} />
+      <Route element={<PublicRoute />}>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+      </Route>
     </Routes>
   );
 };

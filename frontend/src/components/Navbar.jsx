@@ -37,15 +37,7 @@ const Navbar = () => {
             MemoStack
           </h1>
           <div className="flex items-center gap-4 ">
-            <Button
-              variant="outline"
-              className={`hidden md:inline-flex`}
-              onClick={handleNewNote}
-            >
-              <PlusIcon />
-              <span>New Note</span>
-            </Button>
-            <div className="hidden lg:block">
+            <div className="hidden md:block">
               {loading ? (
                 <Skeleton className="h-6 w-32 rounded-md" />
               ) : (
@@ -56,7 +48,16 @@ const Navbar = () => {
                 )
               )}
             </div>
-            <div className="hidden lg:block">
+            <Button
+              variant="outline"
+              className={`hidden md:inline-flex`}
+              onClick={handleNewNote}
+            >
+              <PlusIcon />
+              <span>New Note</span>
+            </Button>
+
+            <div className="hidden md:block">
               <ModeToggle />
             </div>
             <Button
