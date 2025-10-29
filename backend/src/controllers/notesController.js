@@ -70,3 +70,20 @@ export async function deleteNote(req, res) {
     res.status(500).json({ message: "Internal server error" });
   }
 }
+
+export async function searchNotes(req, res) {
+  try {
+    const query = req.query.q || "";
+    const notes = await Note.find({
+      $or: [
+        { title: { $regex: query, $options: "i" } },
+        { content: { $regex: query, $options: "i" } },
+      ],
+    }).sort({ createdAt: -1 });
+
+    res.json(notes);
+  } catch (error) {
+    console.error("Error in searchNotes controller", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+}
